@@ -97,19 +97,21 @@ Zorg ervoor dat je met behulp van deze lijst onderstaand resultaat verkrijgt:
 
   - Stijl ‘Rastertabel 5 Donker – Accent 3’, binnen- en buitenrand zwart, 1pt
 
-- - - Kolomtitels (Nr., Naam,…) in het vet en in het zwart. Centreren.
+  - Kolomtitels (Nr., Naam,…) in het vet en in het zwart. Centreren.
 
-- - - Kolom **Nr.** : Breedte 1 cm. Tekst in het vet. Tekst gecentreerd.
+  - Kolom **Nr.** : Breedte 1 cm. Tekst in het vet. Tekst gecentreerd.
 
-- - - Kolom **Naam**: Breedte 2,5 cm.
+  - Kolom **Naam**: Breedte 2,5 cm.
 
-- - - Kolom **Type**: Geef deze kolom eerst een breedte van 3,3 cm. Je splitst daarna de cellen in 2 delen. In de linkerzijde (breedte 0,8 cm) plaats je de code van deze persoon, namelijk **F**(amilie), **V**(riend) of **L**(eraar). In de rechterzijde (breedte 2,5 cm) plaats je extra info omtrent die persoon (welk soort familie, van waar ken je deze vriend, welk vak geeft deze leraar, …).
+  - Kolom **Type**: Geef deze kolom eerst een breedte van 3,3 cm. Je splitst daarna de cellen in 2 delen. In de linkerzijde (breedte 0,8 cm) plaats je de code van deze persoon, namelijk **F**(amilie), **V**(riend) of **L**(eraar). In de rechterzijde (breedte 2,5 cm) plaats je extra info omtrent die persoon (welk soort familie, van waar ken je deze vriend, welk vak geeft deze leraar, …).
 
-- - - Kolom **Email**: Breedte 6,7 cm.
+  - Kolom **Email**: Breedte 6,7 cm.
 
-- - - Kolom **Opmerking**: Breedte 3,5 cm.
-- - - De tekst in de cellen (niet de titels) heeft volgende opmaak: **Tahoma, 10 pt.**
+  - Kolom **Opmerking**: Breedte 3,5 cm.
+  - De tekst in de cellen (niet de titels) heeft volgende opmaak: **Tahoma, 10 pt.**
 
 ![](https://www.in4matica.be/wp-content/uploads/2019/02/herhalingsoef.-4.jpg)
 
 - [ ] Zorg dat er geen schrijffouten in jouw document voorkomen door een **spelling- en grammaticacontrole** uit te voeren.
+
+- [ ] laad de oefening op in de uploadzone. Vakken > SK - ICT > Uploadzone > Niveau D > Word > Herhalingsoefening
