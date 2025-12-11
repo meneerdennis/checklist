@@ -18,7 +18,9 @@
 
 Via deze herhalingsoefening kan je de vaardigheden van de onderdelen ‘basishandelingen’, ‘stijlen’, ‘opsommingen en nummering’, ‘afbeeldingen’ en ‘tabellen’ nogmaals grondig inoefenen. Naast het blanco tekstbestand, kan je ook het eindresultaat raadplegen in een pdf-versie.
 
-- [ ] Download het document ‘Herhalingsoefening_zakelijke e-mailetiquette’
+- [ ] Download het document ‘Herhalingsoefening_zakelijke e-mailetiquette’.
+
+- [ ] Download ook de 2 afbeeldingen die je nodig zult hebben.
 
 - [ ] bewaar het in jouw mapje op **OneDrive**.
 
