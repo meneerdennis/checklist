@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Markdown Task Checklist</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Oxygen, Ubuntu, Cantarell, sans-serif;
+        line-height: 1.6;
+        color: #24292e;
+        background: #f6f8fa;
+        min-height: 100vh;
+        padding: 20px;
+      }
+
+      .container {
+        max-width: 900px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 6px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+      }
+
+      .header {
+        background: #24292e;
+        color: white;
+        padding: 30px;
+        text-align: center;
+      }
+
+      .header h1 {
+        font-size: 2.2em;
+        margin-bottom: 10px;
+        font-weight: 300;
+      }
+
+      .header p {
+        font-size: 1.1em;
+        opacity: 0.8;
+      }
+
+      .content {
+        padding: 40px;
+      }
+
+      .markdown-content {
+        font-size: 16px;
+        line-height: 1.6;
+      }
+
+      .markdown-content h1 {
+        font-size: 2em;
+        font-weight: 600;
+        margin: 1.5em 0 0.5em 0;
+        padding-bottom: 0.3em;
+        border-bottom: 1px solid #eaecef;
+        color: #1f2328;
+      }
+
+      .markdown-content h2 {
+        font-size: 1.5em;
+        font-weight: 600;
+        margin: 1.3em 0 0.5em 0;
+        color: #1f2328;
+      }
+
+      .markdown-content h3 {
+        font-size: 1.25em;
+        font-weight: 600;
+        margin: 1.2em 0 0.5em 0;
+        color: #1f2328;
+      }
+
+      .markdown-content p {
+        margin: 1em 0;
+        color: #24292e;
+      }
+
+      .markdown-content ul,
+      .markdown-content ol {
+        margin: 1em 0;
+        padding-left: 2em;
+      }
+
+      .markdown-content li {
+        margin: 0.5em 0;
+      }
+
+      .markdown-content li.main-task-item {
+        display: flex;
+        align-items: flex-start;
+        margin: 0.8em 0;
+        padding: 6px 0;
+        transition: background-color 0.2s ease;
+      }
+
+      .markdown-content li.main-task-item:hover {
+        background-color: #f6f8fa;
+        border-radius: 3px;
+        padding: 6px 8px;
+        margin: 0.8em -8px;
+      }
+
+      .markdown-content li.sub-task-item {
+        display: flex;
+        align-items: flex-start;
+        margin: 0.5em 0;
+        padding: 3px 0;
+        margin-left: 2em;
+        padding-left: 0.5em;
+        border-left: 2px solid #e1e4e8;
+        color: #586069;
+        font-size: 0.95em;
+      }
+
+      .main-checkbox {
+        width: 20px;
+        height: 20px;
+        margin-right: 12px;
+        margin-top: 2px;
+        cursor: pointer;
+        accent-color: #28a745;
+        flex-shrink: 0;
+      }
+
+      .sub-checkbox {
+        width: 14px;
+        height: 14px;
+        margin-right: 12px;
+        margin-top: 4px;
+        cursor: pointer;
+        accent-color: #6a737d;
+        flex-shrink: 0;
+      }
+
+      .main-task-text,
+      .sub-task-text {
+        flex: 1;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .main-checkbox:checked + .main-task-text {
+        text-decoration: line-through;
+        color: #6a737d;
+        opacity: 0.7;
+      }
+
+      .sub-checkbox:checked + .sub-task-text {
+        text-decoration: line-through;
+        color: #6a737d;
+        opacity: 0.7;
+      }
+
+      .markdown-content img {
+        max-width: 100%;
+        height: auto;
+        border: 1px solid #d1d5da;
+        border-radius: 6px;
+        margin: 1em auto;
+        display: block;
+      }
+
+      .markdown-content blockquote {
+        border-left: 4px solid #dfe2e5;
+        padding-left: 1em;
+        margin: 1em 0;
+        color: #6a737d;
+        font-style: italic;
+      }
+
+      .markdown-content code {
+        background-color: #f3f4f6;
+        padding: 2px 4px;
+        border-radius: 3px;
+        font-size: 85%;
+        font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo,
+          monospace;
+      }
+
+      .markdown-content pre {
+        background-color: #f6f8fa;
+        border: 1px solid #d1d5da;
+        border-radius: 6px;
+        padding: 16px;
+        overflow-x: auto;
+        margin: 1em 0;
+      }
+
+      .markdown-content pre code {
+        background: none;
+        padding: 0;
+        border: none;
+      }
+
+      .progress-section {
+        background: #f6f8fa;
+        border: 1px solid #d1d5da;
+        border-radius: 6px;
+        padding: 20px;
+        margin: 30px 0;
+      }
+
+      .progress-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+      }
+
+      .progress-text {
+        font-weight: 600;
+        color: #1f2328;
+      }
+
+      .save-status {
+        font-size: 14px;
+        color: #28a745;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .save-status.show {
+        opacity: 1;
+      }
+
+      .controls {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+      }
+
+      .btn {
+        background: #24292e;
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 500;
+        transition: background-color 0.2s ease;
+      }
+
+      .btn:hover {
+        background: #1f2328;
+      }
+
+      .btn-secondary {
+        background: #6a737d;
+      }
+
+      .btn-secondary:hover {
+        background: #586069;
+      }
+
+      .progress-bar-container {
+        background: #e1e4e8;
+        border-radius: 4px;
+        height: 8px;
+        overflow: hidden;
+      }
+
+      .progress-bar {
+        height: 100%;
+        background: linear-gradient(90deg, #28a745, #20c997);
+        border-radius: 4px;
+        transition: width 0.3s ease;
+        width: 0%;
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          margin: 10px;
+          border-radius: 0;
+        }
+
+        .header {
+          padding: 20px;
+        }
+
+        .header h1 {
+          font-size: 1.8em;
+        }
+
+        .content {
+          padding: 20px;
+        }
+
+        .markdown-content {
+          font-size: 15px;
+        }
+
+        .controls {
+          flex-direction: column;
+          align-items: stretch;
+        }
+
+        .markdown-content li.sub-task-item {
+          margin-left: 1em;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>📄 Markdown Task Checklist</h1>
+        <p>Interactive markdown document with hierarchical task tracking</p>
+      </div>
+
+      <div class="content">
+        <div class="progress-section">
+          <div class="progress-header">
+            <span class="progress-text" id="progressText"
+              >0 of 0 main tasks completed</span
+            >
+            <div class="controls">
+              <span class="save-status" id="saveStatus">✓ Auto-saved</span>
+              <button class="btn btn-secondary" onclick="clearProgress()">
+                🔄 Reset All
+              </button>
+            </div>
+          </div>
+          <div class="progress-bar-container">
+            <div class="progress-bar" id="progressBar"></div>
+          </div>
+        </div>
+
+        <div id="markdownContent" class="markdown-content">
+          <!-- Markdown content will be loaded here -->
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Store task hierarchy relationships
+      const taskHierarchy = {};
+      let taskCounter = 0;
+
+      // Load and render markdown content
+      async function loadMarkdown() {
+        try {
+          const response = await fetch("tasks.md");
+          const text = await response.text();
+          renderMarkdown(text);
+          updateProgress();
+        } catch (error) {
+          console.error("Error loading markdown:", error);
+          document.getElementById("markdownContent").innerHTML =
+            "<p>Error loading content. Please ensure tasks.md file exists.</p>";
+        }
+      }
+
+      // Simple markdown renderer with hierarchical checkbox support
+      function renderMarkdown(markdownText) {
+        const container = document.getElementById("markdownContent");
+
+        // Reset counters and hierarchy
+        taskCounter = 0;
+        for (let key in taskHierarchy) delete taskHierarchy[key];
+
+        // Split into lines and process
+        const lines = markdownText.split("\n");
+        let html = "";
+        let inList = false;
+        let currentMainTaskId = null;
+
+        console.log("Total lines:", lines.length);
+
+        lines.forEach((line, index) => {
+          const trimmedLine = line.trim();
+
+          if (!trimmedLine) {
+            if (inList) {
+              html += "</ul>\n";
+              inList = false;
+            }
+            html += "\n";
+            return;
+          }
+
+          // Headers
+          if (trimmedLine.startsWith("# ")) {
+            if (inList) {
+              html += "</ul>\n";
+              inList = false;
+            }
+            html += `<h1>${escapeHtml(trimmedLine.substring(2))}</h1>\n`;
+          } else if (trimmedLine.startsWith("## ")) {
+            if (inList) {
+              html += "</ul>\n";
+              inList = false;
+            }
+            html += `<h2>${escapeHtml(trimmedLine.substring(3))}</h2>\n`;
+          } else if (trimmedLine.startsWith("### ")) {
+            if (inList) {
+              html += "</ul>\n";
+              inList = false;
+            }
+            html += `<h3>${escapeHtml(trimmedLine.substring(4))}</h3>\n`;
+          }
+          // Main task list items (with checkboxes: - [ ])
+          else if (trimmedLine.match(/^- \[( |x|X)\].*/)) {
+            const taskMatch = trimmedLine.match(/^- \[( |x|X)\](.*)/);
+            const taskText = taskMatch[2].trim();
+            const isCompleted = taskMatch[1] === "x" || taskMatch[1] === "X";
+            const taskId = `task-${taskCounter++}`;
+
+            if (!inList) {
+              html += "<ul>\n";
+              inList = true;
+            }
+
+            html += `<li class="main-task-item">
+                                <input type="checkbox" class="main-checkbox" id="${taskId}" ${
+              isCompleted ? "checked" : ""
+            }>
+                                <label for="${taskId}" class="main-task-text">${renderInlineMarkdown(
+              taskText
+            )}</label>
+                             </li>\n`;
+
+            currentMainTaskId = taskId;
+            taskHierarchy[taskId] = [];
+
+            console.log(
+              `Main Task ${taskCounter}: "${taskText}" (completed: ${isCompleted})`
+            );
+          }
+          // Sub-task list items (regular list items: - )
+          else if (trimmedLine.startsWith("- ") && currentMainTaskId) {
+            const subTaskText = trimmedLine.substring(2);
+            const subTaskId = `subtask-${currentMainTaskId}-${taskHierarchy[currentMainTaskId].length}`;
+
+            if (!inList) {
+              html += "<ul>\n";
+              inList = true;
+            }
+
+            html += `<li class="sub-task-item">
+                                <input type="checkbox" class="sub-checkbox" id="${subTaskId}" data-parent="${currentMainTaskId}">
+                                <label for="${subTaskId}" class="sub-task-text">${renderInlineMarkdown(
+              subTaskText
+            )}</label>
+                             </li>\n`;
+
+            // Track the relationship
+            taskHierarchy[currentMainTaskId].push(subTaskId);
+
+            console.log(
+              `Sub-task under ${currentMainTaskId}: "${subTaskText}"`
+            );
+          }
+          // Regular list items (no checkbox)
+          else if (trimmedLine.startsWith("- ")) {
+            if (inList) {
+              html += "</ul>\n";
+              inList = false;
+            }
+
+            const listText = trimmedLine.substring(2);
+            html += `<li>${renderInlineMarkdown(listText)}</li>\n`;
+            currentMainTaskId = null;
+          }
+          // Regular paragraphs
+          else {
+            if (inList) {
+              html += "</ul>\n";
+              inList = false;
+            }
+            html += `<p>${renderInlineMarkdown(trimmedLine)}</p>\n`;
+            currentMainTaskId = null;
+          }
+        });
+
+        if (inList) {
+          html += "</ul>\n";
+        }
+
+        console.log("Task hierarchy:", taskHierarchy);
+        console.log("Total main tasks found:", taskCounter);
+
+        container.innerHTML = html;
+
+        // Add event listeners to all checkboxes
+        document
+          .querySelectorAll(".main-checkbox, .sub-checkbox")
+          .forEach((checkbox) => {
+            checkbox.addEventListener("change", handleCheckboxChange);
+          });
+      }
+
+      // Handle checkbox changes with hierarchical logic
+      function handleCheckboxChange(event) {
+        const checkbox = event.target;
+        const isChecked = checkbox.checked;
+
+        if (checkbox.classList.contains("sub-checkbox")) {
+          // Sub-task checkbox changed
+          const parentId = checkbox.dataset.parent;
+          updateMainTaskStatus(parentId);
+        } else if (checkbox.classList.contains("main-checkbox")) {
+          // Main task checkbox changed - update all sub-tasks
+          const taskId = checkbox.id;
+          const subTasks = taskHierarchy[taskId] || [];
+
+          subTasks.forEach((subTaskId) => {
+            const subCheckbox = document.getElementById(subTaskId);
+            if (subCheckbox) {
+              subCheckbox.checked = isChecked;
+            }
+          });
+        }
+
+        updateProgress();
+        autoSaveProgress();
+      }
+
+      // Update main task status based on sub-task completion
+      function updateMainTaskStatus(mainTaskId) {
+        const subTasks = taskHierarchy[mainTaskId] || [];
+        const mainCheckbox = document.getElementById(mainTaskId);
+
+        if (subTasks.length === 0) return;
+
+        const allSubTasksCompleted = subTasks.every((subTaskId) => {
+          const subCheckbox = document.getElementById(subTaskId);
+          return subCheckbox && subCheckbox.checked;
+        });
+
+        // Update main checkbox
+        mainCheckbox.checked = allSubTasksCompleted;
+      }
+
+      // Render inline markdown (bold, italic, code, links, images)
+      function renderInlineMarkdown(text) {
+        // Images
+        text = text.replace(
+          /!\[([^\]]*)\]\(([^)]+)\)/g,
+          '<img src="$2" alt="$1">'
+        );
+
+        // Links
+        text = text.replace(
+          /\[([^\]]+)\]\(([^)]+)\)/g,
+          '<a href="$2" target="_blank">$1</a>'
+        );
+
+        // Bold
+        text = text.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+
+        // Italic
+        text = text.replace(/\*([^*]+)\*/g, "<em>$1</em>");
+
+        // Code
+        text = text.replace(/`([^`]+)`/g, "<code>$1</code>");
+
+        return text;
+      }
+
+      // Escape HTML characters
+      function escapeHtml(text) {
+        const div = document.createElement("div");
+        div.textContent = text;
+        return div.innerHTML;
+      }
+
+      // Update progress tracking (based on main tasks)
+      function updateProgress() {
+        const mainCheckboxes = document.querySelectorAll(".main-checkbox");
+        const totalMainTasks = mainCheckboxes.length;
+        const completedMainTasks = Array.from(mainCheckboxes).filter(
+          (cb) => cb.checked
+        ).length;
+
+        const progressText = document.getElementById("progressText");
+        const progressBar = document.getElementById("progressBar");
+
+        progressText.textContent = `${completedMainTasks} of ${totalMainTasks} main tasks completed`;
+
+        const percentage =
+          totalMainTasks > 0 ? (completedMainTasks / totalMainTasks) * 100 : 0;
+        progressBar.style.width = `${percentage}%`;
+      }
+
+      // Auto-save progress to localStorage
+      function autoSaveProgress() {
+        const allCheckboxes = document.querySelectorAll(
+          ".main-checkbox, .sub-checkbox"
+        );
+        const progress = {};
+
+        allCheckboxes.forEach((checkbox) => {
+          progress[checkbox.id] = checkbox.checked;
+        });
+
+        localStorage.setItem("markdownTaskProgress", JSON.stringify(progress));
+
+        // Show auto-save feedback
+        const saveStatus = document.getElementById("saveStatus");
+        saveStatus.classList.add("show");
+
+        setTimeout(() => {
+          saveStatus.classList.remove("show");
+        }, 2000);
+      }
+
+      // Load progress from localStorage
+      function loadProgress() {
+        const saved = localStorage.getItem("markdownTaskProgress");
+        if (saved) {
+          const progress = JSON.parse(saved);
+
+          Object.keys(progress).forEach((checkboxId) => {
+            const checkbox = document.getElementById(checkboxId);
+            if (checkbox) {
+              checkbox.checked = progress[checkboxId];
+            }
+          });
+
+          // Update all main task statuses after loading
+          Object.keys(taskHierarchy).forEach((mainTaskId) => {
+            updateMainTaskStatus(mainTaskId);
+          });
+
+          updateProgress();
+        }
+      }
+
+      // Clear all progress
+      function clearProgress() {
+        if (
+          confirm(
+            "Are you sure you want to reset all task progress? This cannot be undone."
+          )
+        ) {
+          localStorage.removeItem("markdownTaskProgress");
+          const allCheckboxes = document.querySelectorAll(
+            ".main-checkbox, .sub-checkbox"
+          );
+          allCheckboxes.forEach((checkbox) => {
+            checkbox.checked = false;
+          });
+
+          updateProgress();
+
+          // Show feedback
+          const saveStatus = document.getElementById("saveStatus");
+          saveStatus.textContent = "🔄 Progress reset";
+          saveStatus.style.color = "#e53e3e";
+          saveStatus.classList.add("show");
+
+          setTimeout(() => {
+            saveStatus.textContent = "✓ Auto-saved";
+            saveStatus.style.color = "#28a745";
+            saveStatus.classList.remove("show");
+          }, 2000);
+        }
+      }
+
+      // Load content and progress when page loads
+      window.addEventListener("load", () => {
+        loadMarkdown().then(() => {
+          // Wait for content to be rendered, then load progress
+          setTimeout(loadProgress, 200);
+        });
+      });
+    </script>
+  </body>
+</html>
