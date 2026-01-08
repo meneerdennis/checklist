@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pictogrammen</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Oxygen, Ubuntu, Cantarell, sans-serif;
+        line-height: 1.6;
+        color: #24292e;
+        background: #f6f8fa;
+        min-height: 100vh;
+        padding: 20px;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .header {
+        text-align: center;
+        margin-bottom: 40px;
+      }
+
+      .header h1 {
+        font-size: 2em;
+        font-weight: 600;
+        color: #1f2328;
+        margin-bottom: 10px;
+      }
+
+      .header p {
+        font-size: 1.1em;
+        color: #586069;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 24px;
+      }
+
+      .grid-item {
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .grid-item:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      }
+
+      .grid-item img {
+        width: 100%;
+        height: 200px;
+        object-fit: contain;
+        background: #f6f8fa;
+      }
+
+      .grid-item .filename {
+        padding: 12px;
+        text-align: center;
+        font-size: 0.9em;
+        color: #586069;
+        border-top: 1px solid #eaecef;
+      }
+
+      @media (max-width: 600px) {
+        .grid {
+          grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+          gap: 16px;
+        }
+
+        .grid-item img {
+          height: 150px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>Pictogrammen</h1>
+        <p>Overzicht van alle pictogrammen</p>
+      </div>
+
+      <div class="grid">
+        <div class="grid-item">
+          <img src="6.jpg" alt="6" />
+          <div class="filename">6.jpg</div>
+        </div>
+        <div class="grid-item">
+          <img src="10.jpg" alt="10" />
+          <div class="filename">10.jpg</div>
+        </div>
+        <div class="grid-item">
+          <img src="12.jpg" alt="12" />
+          <div class="filename">12.jpg</div>
+        </div>
+        <div class="grid-item">
+          <img src="16.jpg" alt="16" />
+          <div class="filename">16.jpg</div>
+        </div>
+        <div class="grid-item">
+          <img src="al.jpg" alt="al" />
+          <div class="filename">al.jpg</div>
+        </div>
+        <div class="grid-item">
+          <img src="angst.jpg" alt="angst" />
+          <div class="filename">angst.jpg</div>
+        </div>
+        <div class="grid-item">
+          <img src="discriminatie.jpg" alt="discriminatie" />
+          <div class="filename">discriminatie.jpg</div>
+        </div>
+        <div class="grid-item">
+          <img src="drugs.jpg" alt="drugs" />
+          <div class="filename">drugs.jpg</div>
+        </div>
+        <div class="grid-item">
+          <img src="geweld.jpg" alt="geweld" />
+          <div class="filename">geweld.jpg</div>
+        </div>
+        <div class="grid-item">
+          <img src="groftaalgebruik.jpg" alt="groftaalgebruik" />
+          <div class="filename">groftaalgebruik.jpg</div>
+        </div>
+        <div class="grid-item">
+          <img src="seks.jpg" alt="seks" />
+          <div class="filename">seks.jpg</div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
